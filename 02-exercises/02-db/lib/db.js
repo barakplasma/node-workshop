@@ -30,7 +30,14 @@ module.exports = (fileLocation) => {
       })
     },
     
-    deleteTodo: undefined 
+    deleteTodo(userId,id,cb){
+      readUserFile(userId,(err,todos)=>{
+        if(err)
+          return cb(err)
+        todos.splice(findIndex(todos,id),1)
+        writeUserFile(userId,todos,cb)
+      })
+    }
       /**
        * `deleteTodo(userId, id, cb)` should read the file, remove the todo
        * with the id `id`, and write the file.
@@ -41,9 +48,15 @@ module.exports = (fileLocation) => {
     markTodo(userId, id, cb) {
     /**
      * `markTodo(userId, id, cb)` should read the file, toggle the `checked` flag
-     * of the todo with the id `id, and write the file.
+     * of the todo with the id `id to true, and write the file.
        * Write it using callbacks.
      */
+    readUserFile(userId,(err,todos)=>{
+        if(err)
+          return cb(err)
+        todos[findIndex(todos,id)].checked ? todos[findIndex(todos,id)].checked = false : todos[findIndex(todos,id)].checked = true
+        writeUserFile(userId,todos,cb)
+    })
     },
     
     listTodos(userId, cb) {

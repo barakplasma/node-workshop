@@ -13,7 +13,7 @@ describe("db", function() {
     })
   })
   
-  describe("addTodo", function() {
+  describe.only("addTodo", function() {
     it("adds first todo", () =>
       db.addTodo('aUser', 'hi', 7)
         .then(() => db.listTodos('aUser'))

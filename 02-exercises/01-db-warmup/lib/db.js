@@ -22,7 +22,11 @@ module.exports = (fileLocation) => {
   const findIndex = (todos, id) => todos.findIndex(element => element.id === id)
   
   return {
-    addTodo: undefined
+    addTodo: function(userId, text, id, cb){
+      readUserFile(userId,(err,tdl)=>{
+        err ? cb(err): writeUserFile(userId,tdl.concat({text: text,id: id}),cb)
+    })
+    }
       /**
        * `addTodo(userId, text, id, cb)` should read the file
        * (using the above `readUserFile` function), 

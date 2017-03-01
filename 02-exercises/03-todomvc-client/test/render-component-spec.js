@@ -29,6 +29,7 @@ describe("rendering", function() {
      * The best way to do it is to statically read client/index.html 
      * and compare the first, say, 100 characters. 
      */
-    expect(1).to.equal(2)
+     fetch(`localhost:${serverPort}/`)
+     .then(res=>res.text())
   })
 })
